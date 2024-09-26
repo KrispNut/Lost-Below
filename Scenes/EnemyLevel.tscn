@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw2l5gu12b5m3"]
+
+[ext_resource type="PackedScene" uid="uid://dtyvfe1dd58mb" path="res://Scenes/Enemy.tscn" id="2_07nw6"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_fj1re"]
+vertices = PackedVector3Array(-511.5, 66.1426, -510.177, -511.5, 66.1426, 510.073, 511.5, 66.1426, 510.073, 511.5, 66.1426, -510.177)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[node name="EnemyLevel" type="Node3D"]
+
+[node name="Enemy" parent="." instance=ExtResource("2_07nw6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6395, 7.46251)
+
+[node name="Marker3D" type="Marker3D" parent="." groups=["EnemyWaypoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 331.845, 1, -335.431)
+
+[node name="Marker3D2" type="Marker3D" parent="." groups=["EnemyWaypoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 316.75, 1, 348.402)
+
+[node name="Marker3D3" type="Marker3D" parent="." groups=["EnemyWaypoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -299.694, 1, 327.242)
+
+[node name="Marker3D4" type="Marker3D" parent="." groups=["EnemyWaypoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -290.634, 1, -335.431)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -66.0826, 0)
+navigation_mesh = SubResource("NavigationMesh_fj1re")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(16, 0, 0, 0, 0.629, 0, 0, 0, 9.923, 0, 65.6505, 0)
+visible = false
+size = Vector3(64, 0.0249023, 102.928)

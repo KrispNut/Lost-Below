@@ -1,0 +1,14 @@
+CanvasLayer
+TextureRect
+AudioStreamPlayer
+AnimationPlayer
+Camera3D
+SubViewport
+SubViewportContainer
+Node3D
+MarginContainer
+Button
+Label
+VBoxContainer
+Control
+AudioStreamPlayer3D

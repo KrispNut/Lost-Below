@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://rxpjhfnsa2gl"]
+
+[ext_resource type="PackedScene" uid="uid://g8v6pkormrhl" path="res://assets/Escape/scene.gltf" id="1_fpxhi"]
+[ext_resource type="Script" path="res://Scripts/Escape.cs" id="1_p2ebx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mw0hf"]
+size = Vector3(0.667053, 0.501465, 0.594727)
+
+[node name="Escape" type="Node3D"]
+transform = Transform3D(0.79, 0, 0, 0, 0.79, 0, 0, 0, 0.79, 0, 0, 0)
+
+[node name="StaticBody" type="StaticBody3D" parent="."]
+transform = Transform3D(5.195, 0, 0, 0, 5.195, 0, 0, 0, 5.195, 0, 0, 0)
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_p2ebx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="StaticBody"]
+transform = Transform3D(0.192493, 0, 0, 0, 0.192493, 0, 0, 0, 0.192493, 2.0541, 1.85561, 0)
+light_energy = 16.0
+light_volumetric_fog_energy = 0.075
+shadow_enabled = true
+omni_range = 15.4626
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
+transform = Transform3D(4.05, 0, 0, 0, 4.05, 0, 0, 0, 4.05, -0.0411575, 1.00953, -0.15227)
+shape = SubResource("BoxShape3D_mw0hf")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_fpxhi")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)

@@ -1,0 +1,17 @@
+D:\Horror_Game\.godot\mono\temp\bin\Debug\Horror_Game.deps.json
+D:\Horror_Game\.godot\mono\temp\bin\Debug\Horror_Game.runtimeconfig.json
+D:\Horror_Game\.godot\mono\temp\bin\Debug\Horror_Game.dll
+D:\Horror_Game\.godot\mono\temp\bin\Debug\Horror_Game.pdb
+D:\Horror_Game\.godot\mono\temp\bin\Debug\GodotSharp.dll
+D:\Horror_Game\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.csproj.AssemblyReference.cache
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.GeneratedMSBuildEditorConfig.editorconfig
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.AssemblyInfoInputs.cache
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.AssemblyInfo.cs
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.csproj.CoreCompileInputs.cache
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_G.1E4954E1.Up2Date
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.dll
+D:\Horror_Game\.godot\mono\temp\obj\Debug\refint\Horror_Game.dll
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.pdb
+D:\Horror_Game\.godot\mono\temp\obj\Debug\Horror_Game.genruntimeconfig.cache
+D:\Horror_Game\.godot\mono\temp\obj\Debug\ref\Horror_Game.dll

@@ -1,0 +1,180 @@
+[gd_scene load_steps=18 format=3 uid="uid://w5w8gx58wf3q"]
+
+[ext_resource type="PackedScene" uid="uid://c2l3jscxgoog5" path="res://Scenes/3d_scene.tscn" id="1_or4xi"]
+[ext_resource type="FontFile" uid="uid://5l3h1c40cr3d" path="res://assets/fonts/Klinge Death Brush.ttf" id="2_0uqb1"]
+[ext_resource type="Script" path="res://Scripts/StartBtn.cs" id="3_4rwwm"]
+[ext_resource type="Script" path="res://Scripts/QuitBtn.cs" id="4_wndjx"]
+[ext_resource type="AudioStream" uid="uid://yoadqj8famv4" path="res://assets/Sounds/menu.mp3" id="5_to486"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3i0su"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fwk1v"]
+sky_material = SubResource("ProceduralSkyMaterial_3i0su")
+
+[sub_resource type="Environment" id="Environment_6dvki"]
+background_mode = 1
+sky = SubResource("Sky_fwk1v")
+ambient_light_source = 3
+ambient_light_color = Color(0, 0, 1, 1)
+ambient_light_energy = 15.0
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.258824, 0.6, 0.694118, 1)
+fog_light_energy = 0.0
+fog_density = 0.3
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.7632
+volumetric_fog_albedo = Color(0.149979, 0.395176, 0.461879, 1)
+volumetric_fog_anisotropy = 0.4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0cfwk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vqu6q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_natoa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58xbg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_83wgu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uk5qa"]
+
+[sub_resource type="Animation" id="Animation_kn8wm"]
+length = 4.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/SubViewportContainer/SubViewport/Camera3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.252821, 1.05155, 1.43981), Vector3(-0.370302, 1.05155, 1.43981), Vector3(-0.370302, 1.12904, 1.43981), Vector3(0.250053, 0.997826, 1.43981), Vector3(0.224379, 1.08264, 1.55985)]
+}
+
+[sub_resource type="Animation" id="Animation_18vyj"]
+resource_name = "camera_anim"
+length = 4.0
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e7tar"]
+_data = {
+"RESET": SubResource("Animation_kn8wm"),
+"camera_anim": SubResource("Animation_18vyj")
+}
+
+[node name="Menu" type="CanvasLayer"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.988925, 0.128533, -0.0742084, -1.49013e-08, 0.499998, 0.866027, 0.148417, -0.856435, 0.49446, 0.152068, 3.25351, 1.76125)
+shadow_enabled = true
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="3d_Scene" parent="Background" instance=ExtResource("1_or4xi")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Background/SubViewportContainer"]
+handle_input_locally = false
+msaa_2d = 3
+msaa_3d = 3
+screen_space_aa = 1
+use_taa = true
+use_debanding = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Background/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.252821, 1.05155, 1.43981)
+environment = SubResource("Environment_6dvki")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.108077, 0.125471, 0.135406, 1)
+theme_override_fonts/font = ExtResource("2_0uqb1")
+theme_override_font_sizes/font_size = 231
+text = "Lost Below"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="StartBtn" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.0779878, 0.0906968, 0.100228, 1)
+theme_override_colors/font_pressed_color = Color(0.647059, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.796078, 0.309804, 0, 1)
+theme_override_fonts/font = ExtResource("2_0uqb1")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0cfwk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vqu6q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_natoa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_58xbg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_83wgu")
+text = "Begin"
+script = ExtResource("3_4rwwm")
+
+[node name="QuitBtn" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.0779878, 0.0906968, 0.100228, 1)
+theme_override_colors/font_pressed_color = Color(0.647059, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.796078, 0.309804, 0, 1)
+theme_override_fonts/font = ExtResource("2_0uqb1")
+theme_override_font_sizes/font_size = 150
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0cfwk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uk5qa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_natoa")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_58xbg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_83wgu")
+text = "Exit"
+script = ExtResource("4_wndjx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e7tar")
+}
+autoplay = "RESET"
+speed_scale = 0.228
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_to486")
+volume_db = -15.0
+autoplay = true

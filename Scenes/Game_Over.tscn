@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkbf7ptnv8q2y"]
+
+[ext_resource type="Texture2D" uid="uid://dnl23obv0axd3" path="res://assets/background.png" id="1_y3q7l"]
+[ext_resource type="FontFile" uid="uid://5l3h1c40cr3d" path="res://assets/fonts/Klinge Death Brush.ttf" id="2_2l7kg"]
+[ext_resource type="Script" path="res://Scripts/QuitBtn.cs" id="4_eq217"]
+[ext_resource type="Script" path="res://Scripts/Button.cs" id="4_ssj3r"]
+[ext_resource type="AudioStream" uid="uid://cwa4t7v4vc166" path="res://assets/Sounds/game_over.mp3" id="5_jc7wm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5e1vd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6wlfd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3klb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3678r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd8lp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1s5v5"]
+
+[node name="Game_Over" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 80
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_y3q7l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32009, 0.35346, 0.378514, 1)
+theme_override_fonts/font = ExtResource("2_2l7kg")
+theme_override_font_sizes/font_size = 231
+text = "Game Over"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="StartBtn" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32009, 0.35346, 0.378514, 1)
+theme_override_colors/font_pressed_color = Color(0.647059, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.796078, 0.309804, 0, 1)
+theme_override_fonts/font = ExtResource("2_2l7kg")
+theme_override_font_sizes/font_size = 120
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5e1vd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6wlfd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w3klb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3678r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd8lp")
+text = "Restart"
+script = ExtResource("4_ssj3r")
+
+[node name="QuitBtn" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.32009, 0.35346, 0.378514, 1)
+theme_override_colors/font_pressed_color = Color(0.647059, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.796078, 0.309804, 0, 1)
+theme_override_fonts/font = ExtResource("2_2l7kg")
+theme_override_font_sizes/font_size = 150
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5e1vd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1s5v5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w3klb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3678r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd8lp")
+text = "Exit"
+script = ExtResource("4_eq217")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jc7wm")
+volume_db = -15.0
+autoplay = true

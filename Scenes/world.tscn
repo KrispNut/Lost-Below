@@ -1,0 +1,158 @@
+[gd_scene load_steps=13 format=3 uid="uid://brrje16whxham"]
+
+[ext_resource type="PackedScene" uid="uid://lblgeistgpts" path="res://assets/rock formations/scene.gltf" id="3_gnanr"]
+[ext_resource type="PackedScene" uid="uid://cmqrahyd23idy" path="res://assets/sea items/Shipwreck/ex_hmas_junee.glb" id="4_685sm"]
+[ext_resource type="PackedScene" uid="uid://daawab7vi3vo" path="res://Scenes/Terrain.tscn" id="5_15vmd"]
+[ext_resource type="AudioStream" uid="uid://byt5k7f8jxlo0" path="res://assets/Sounds/creaking-metal-28486.mp3" id="5_xrkg5"]
+[ext_resource type="PackedScene" uid="uid://cy1lsxl4p1nav" path="res://Scenes/player.tscn" id="6_cjjp0"]
+[ext_resource type="AudioStream" uid="uid://bv0c1fv80hysu" path="res://assets/Sounds/underwater-white-noise-46423.mp3" id="6_d7ubv"]
+[ext_resource type="PackedScene" uid="uid://cw2l5gu12b5m3" path="res://Scenes/EnemyLevel.tscn" id="7_c3rui"]
+[ext_resource type="PackedScene" uid="uid://rxpjhfnsa2gl" path="res://Scenes/Escape.tscn" id="8_p1agh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kvyup"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fyjxl"]
+sky_material = SubResource("ProceduralSkyMaterial_kvyup")
+
+[sub_resource type="Environment" id="Environment_60f5c"]
+background_mode = 1
+sky = SubResource("Sky_fyjxl")
+ambient_light_color = Color(0, 0, 1, 1)
+ambient_light_energy = 15.0
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.258824, 0.6, 0.694118, 1)
+fog_light_energy = 0.0
+fog_density = 0.3
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0.149979, 0.395176, 0.461879, 1)
+volumetric_fog_anisotropy = 0.4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ko3y8"]
+size = Vector3(1.05893, 1.39771, 1.23737)
+
+[node name="World" type="Node3D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_d7ubv")
+volume_db = -15.0
+autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_60f5c")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 562.398, 1138.68, 0)
+light_color = Color(0.184314, 0.490196, 0.568627, 1)
+light_energy = 0.5
+light_volumetric_fog_energy = 0.5
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("6_cjjp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -808.458, 2.24366, 23.4579)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="SeaBed" parent="Environment" instance=ExtResource("5_15vmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.879, 0)
+
+[node name="shipwreck" parent="Environment" instance=ExtResource("4_685sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 561.608, -40.4905, 42.4703)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/shipwreck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.887817, 40.4905, -42.4703)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/shipwreck/StaticBody3D"]
+transform = Transform3D(174.551, 0, 0, 0, 22.3337, 0, 0, 0, 37.2377, -9.70819, 4.34211, 12.898)
+shape = SubResource("BoxShape3D_ko3y8")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Environment/shipwreck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 9.34747, 54.2875, -17.7298)
+stream = ExtResource("5_xrkg5")
+volume_db = 8.0
+max_db = 6.0
+autoplay = true
+
+[node name="RocksBorder" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19, 0)
+
+[node name="Sketchfab_Scene" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 602.578, -8.0108, 37.5789)
+
+[node name="Sketchfab_Scene2" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 613.359, -7.60237, 37.5789)
+
+[node name="Sketchfab_Scene3" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 624.055, -7.18061, 37.5789)
+
+[node name="Sketchfab_Scene4" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 635.254, -7.25583, 37.5789)
+
+[node name="Sketchfab_Scene5" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 646.589, -7.21751, 37.5789)
+
+[node name="Sketchfab_Scene6" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 650.295, -7.6639, 30.6763)
+
+[node name="Sketchfab_Scene7" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 651.757, -7.34077, 35.1044)
+
+[node name="Sketchfab_Scene8" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 642.523, -7.21601, 29.1321)
+
+[node name="Sketchfab_Scene9" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 589.591, -8.21174, 37.5789)
+
+[node name="Sketchfab_Scene10" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 578.235, -8.22681, 37.5789)
+
+[node name="Sketchfab_Scene11" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 566.809, -8.1919, 37.5789)
+
+[node name="Sketchfab_Scene12" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 553.605, -7.86799, 35.5611)
+
+[node name="Sketchfab_Scene13" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 543.434, -7.62655, 34.322)
+
+[node name="Sketchfab_Scene14" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 531.133, -7.42055, 34.322)
+
+[node name="Sketchfab_Scene15" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.523381, 0.0712363, 0.849115, 0.0373787, 0.997459, -0.0606419, -0.851278, -6.71229e-09, -0.524714, 518.817, -7.5554, 32.7759)
+
+[node name="Sketchfab_Scene16" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524159, 0.0459732, 0.850378, 0.0241228, 0.998943, -0.039136, -0.851278, 0, -0.524714, 507.419, -6.86528, 31.3617)
+
+[node name="Sketchfab_Scene17" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 495.84, -6.08359, 30.5474)
+
+[node name="Sketchfab_Scene18" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 491.56, -5.87542, 24.9641)
+
+[node name="Sketchfab_Scene19" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 491.56, -5.87542, 20.9223)
+
+[node name="Sketchfab_Scene20" parent="Environment/RocksBorder" instance=ExtResource("3_gnanr")]
+transform = Transform3D(-0.524714, 0, 0.851278, 0, 1, 0, -0.851278, 0, -0.524714, 491.56, -5.87542, 20.9223)
+
+[node name="Enemies" type="Node3D" parent="Environment"]
+
+[node name="EnemyLevel" parent="Environment/Enemies" instance=ExtResource("7_c3rui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 491.704, -22.7523, -470.621)
+
+[node name="EnemyLevel2" parent="Environment/Enemies" instance=ExtResource("7_c3rui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -497.318, -11.4802, -471.261)
+
+[node name="EnemyLevel3" parent="Environment/Enemies" instance=ExtResource("7_c3rui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -501, -22.5801, 466)
+
+[node name="EnemyLevel4" parent="Environment/Enemies" instance=ExtResource("7_c3rui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 448.044, -24.7229, 455.025)
+
+[node name="Escape" parent="Environment" instance=ExtResource("8_p1agh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -834.827, 0.267854, 25.5841)

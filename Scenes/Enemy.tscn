@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtyvfe1dd58mb"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_0blbr"]
+[ext_resource type="AudioStream" uid="uid://dx88tqtyxl8nh" path="res://assets/Sounds/suspense_chase.mp3" id="2_e2srl"]
+[ext_resource type="PackedScene" uid="uid://dtk6uuakqpsf2" path="res://assets/Creature/scene.gltf" id="2_g7uib"]
+[ext_resource type="AudioStream" uid="uid://c1aot1aw2jbty" path="res://assets/Sounds/Caught.mp3" id="3_u8e7a"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ldm5l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5x8k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n5cg8"]
+radius = 4.868
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vvsum"]
+radius = 23.4651
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yjlmf"]
+points = PackedVector3Array(-2, 2, -2, 2, 2, -2, 0, 2, 0, -2, 0, -2, 2, 0, -2, 0, 0, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_753bp"]
+points = PackedVector3Array(-18, 2, -18, 18, 2, -18, 0, 2, 0, -18, 0, -18, 18, 0, -18, 0, 0, 0)
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_0blbr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_ldm5l")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.399378, 0, 0, 0, -8.96083e-09, -0.205, 0, 0.205, -8.96083e-09, 0, 1.4, -0.434299)
+visible = false
+mesh = SubResource("CapsuleMesh_ldm5l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_f5x8k")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="waitTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Close Hearing" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Close Hearing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_n5cg8")
+
+[node name="Far Hearing" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Far Hearing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_vvsum")
+
+[node name="Close Sight" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Close Sight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.357823)
+shape = SubResource("ConvexPolygonShape3D_yjlmf")
+
+[node name="Far Sight" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Far Sight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.955532)
+shape = SubResource("ConvexPolygonShape3D_753bp")
+
+[node name="Head" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40329, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_e2srl")
+volume_db = 20.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_u8e7a")
+volume_db = 80.0
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_g7uib")]
+transform = Transform3D(-0.025, 0, -2.18557e-09, 0, 0.025, 0, 2.18557e-09, 0, -0.025, 0, 2.35761, 12.8901)
+
+[connection signal="timeout" from="waitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="body_entered" from="Close Hearing" to="." method="_on_close_hearing_body_entered"]
+[connection signal="body_exited" from="Close Hearing" to="." method="_on_close_hearing_body_exited"]
+[connection signal="body_entered" from="Far Hearing" to="." method="_on_far_hearing_body_entered"]
+[connection signal="body_exited" from="Far Hearing" to="." method="_on_far_hearing_body_exited"]
+[connection signal="body_entered" from="Close Sight" to="." method="_on_close_sight_body_entered"]
+[connection signal="body_exited" from="Close Sight" to="." method="_on_close_sight_body_exited"]
+[connection signal="body_entered" from="Far Sight" to="." method="_on_far_sight_body_entered"]
+[connection signal="body_exited" from="Far Sight" to="." method="_on_far_sight_body_exited"]
